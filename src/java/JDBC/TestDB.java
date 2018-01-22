@@ -1,3 +1,5 @@
+package JDBC;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -18,7 +20,7 @@ public class TestDB {
         }
     }
     public static void runTest()throws IOException , SQLException{
-        try(Connection conn = getConnection();
+        try(Connection conn = jdbcUtils.getConnection();
             Statement stat = conn.createStatement())
         {
             stat.executeUpdate("CREATE TABLE Greetings(Message CHAR(20))");
@@ -31,19 +33,6 @@ public class TestDB {
             //stat.executeUpdate("DROP TABLE Greetings");
         }
     }
-    public static Connection getConnection()throws IOException , SQLException{
-        Properties props = new Properties();
-        try(InputStream in = Files.newInputStream(Paths.get("resources/database.properties")))
-        {
-            props.load(in);
-        }
-        String drivers = props.getProperty("jdbc.drivers");
-        if(drivers!= null) System.setProperty("jdbc.drivers",drivers);
-        String url = props.getProperty("jdbc.url");
-        String username = props.getProperty("jdbc.username");
-        String password = props.getProperty("jdbc.password");
 
-        return DriverManager.getConnection(url,username,password);
-    }
 }
 
