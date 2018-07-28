@@ -1,22 +1,17 @@
+package FilterDemo;
 
 /**
  * Created by v_kangjiayuan on 2017/12/18.
  */
-public class Request {
+public class Response {
     StringBuffer content;
-
-    public Request() {
-
-        content = new StringBuffer("request");
-
+    public Response(){
+        content = new StringBuffer("response");
     }
-
-    public Request(StringBuffer content){
-
+    public Response(StringBuffer content){
         this.content = new StringBuffer(content);
 
     }
-
     public StringBuffer getContent() {
 
         return content;
