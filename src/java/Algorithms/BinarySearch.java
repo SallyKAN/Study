@@ -19,7 +19,7 @@ public class BinarySearch<Key extends Comparable<Key>,Value> {
         return N;
     }
     public Value get(Key key){
-        if (isEmpty()) return null;
+//        if (isEmpty()) return null;
         int i = rank(key);
         if(i<N && keys[i].compareTo(key)== 0) return values[i];
         else return null;
