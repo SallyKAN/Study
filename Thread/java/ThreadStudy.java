@@ -1,24 +1,29 @@
+import java.util.Date;
+
 /**
  * @Description
  * @Author kangjiayuan
  * @Date 2019-02-13
  */
 
-public class ThreadStudy extends Thread {
-    public void run() {
-        try {
-            System.out.println("current thread:" + Thread.currentThread().getId() + " is running  "+"priority is: "+Thread.currentThread().getPriority());
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
-        }
-    }
+public class ThreadStudy {
 
     public static void main(String[] args) {
-        System.out.println("main thread:"+ Thread.currentThread().getPriority());
-        for (int i = 0; i < 11; i++) {
-            ThreadStudy thread1 = new ThreadStudy();
-            thread1.start();
+        DiningPhilosophers[] diningPhilosophers = new DiningPhilosophers[5];
+        Object[] forks = new Object[diningPhilosophers.length];
+        for (int i = 0; i < forks.length; i++) {
+            forks[i] = new Object();
         }
+        for (int i = 0; i < diningPhilosophers.length; i++) {
+            Object leftFork = forks[i];
+            Object rightFork = forks[(i + 1) % forks.length];
+
+            diningPhilosophers[i] = new DiningPhilosophers(leftFork, rightFork);
+            Thread t
+                    = new Thread(diningPhilosophers[i], "Philosopher " + (i + 1));
+            t.start();
+        }
+
     }
 }
 
