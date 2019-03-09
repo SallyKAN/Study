@@ -17,8 +17,11 @@ public class ThreadStudy {
         for (int i = 0; i < diningPhilosophers.length; i++) {
             Object leftFork = forks[i];
             Object rightFork = forks[(i + 1) % forks.length];
-
-            diningPhilosophers[i] = new DiningPhilosophers(leftFork, rightFork);
+            if (i == diningPhilosophers.length - 1) {
+                diningPhilosophers[i] = new DiningPhilosophers(rightFork, leftFork);
+            } else {
+                diningPhilosophers[i] = new DiningPhilosophers(leftFork, rightFork);
+            }
             Thread t
                     = new Thread(diningPhilosophers[i], "Philosopher " + (i + 1));
             t.start();
